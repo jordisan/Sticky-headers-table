@@ -1,3 +1,5 @@
 ## Sticky headers table
 
-Different solutions for headers with sticky (fixed) headers (first row and first column)
+Different HTML/CSS/JavaScript solutions for headers with sticky (fixed) headers (first row and first column)
+
+Demo at http://stickytable.jordisan.net/
