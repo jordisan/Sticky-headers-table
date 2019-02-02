@@ -47,10 +47,10 @@ table.budget {
         z-index: 101;
     }
 
-a.fa-file {
-    padding: 0 3px;
-    color: #66f;
-    font-size: 16px;
+pre.code {
+    float: right;
+    margin: 0 0 10px 10px;
+    font-size: 11px;
 }
 
 

@@ -9,13 +9,12 @@
 
       <main>
           <h1>Sticky headers table</h1>
-            <p>By Jordi Sánchez (<a href="mailto:ramsys@gmail.com">ramsys@gmail.com</a>)</p>
+            <p>Source code at: <a href="https://github.com/jordisan/Sticky-headers-table" target="_blank">https://github.com/jordisan/Sticky-headers-table</a></p>
             <p>Guidelines:</p>
             <ul>
                 <li>Simplicity and robustness</li>
                 <li>Minimize dependencies</li>
                 <li>Maximize browser compatibility</li>
-                <li>Source code at: <a href="https://github.com/jordisan/Sticky-headers-table" target="_blank">https://github.com/jordisan/Sticky-headers-table</a></li>
             </ul>
 
           <h2>1. Pure HTML + CSS (position: sticky)</h2>
@@ -25,7 +24,30 @@
                           <li>Adapts naturally to content</li>
                           <li>Good SEO; fast; practical</li>
                           <li>Not supported by older browsers</li>
-                  </ul>           
+                  </ul> 
+                  <pre class="code">
+                    <code>
+.purecss table.budget td:first-child, 
+.purecss th:first-child,
+.purecss table.budget th {
+    position: -webkit-sticky;
+    position: sticky;
+    z-index: 100;
+    left: 0;
+}
+
+.purecss table.budget td:first-child, 
+.purecss th:first-child {
+    z-index: 100;
+    left: 0;
+}
+
+.purecss table.budget th {
+    z-index: 101;
+    top: 0;
+}
+                    </code>
+                </pre>          
                   <div class="table-wrapper">
                           <table class="budget">
                               <thead>
@@ -162,7 +184,25 @@
                   <ul>
                           <li>No jQuery required</li>
                           <li>Requires ES6 support</li>
-                  </ul>           
+                  </ul>     
+                  <pre class="code">
+                        <code>
+function tableFixHead (e) {
+    const el = e.target,
+            sT = el.scrollTop,
+            sL = el.scrollLeft;
+    [...el.querySelectorAll("thead th")].forEach(th => 
+        th.style.transform = `translateY(${sT}px)`
+    );
+    [...el.querySelectorAll("td:first-child")].forEach(td => 
+        td.style.transform = `translateX(${sL}px)`
+    );
+}
+[...document.querySelectorAll(".withes6 .table-wrapper")].forEach(el => 
+    el.addEventListener("scroll", tableFixHead)
+);
+                        </code>
+                    </pre>                         
                   <div class="table-wrapper">
                           <table class="budget stickyjs">
                               <thead>
@@ -299,7 +339,18 @@
                   <ul>
                           <li>jQuery required</li>
                           <li>Best support (even IE!)</li>
-                  </ul>           
+                  </ul>      
+                  <pre class="code">
+                        <code>
+var $wrapper = $('.withjquery .table-wrapper');
+var $th = $wrapper.find('thead th');
+var $td = $wrapper.find('td:first-child');
+$wrapper.on('scroll', function() {
+    $th.css('transform', 'translateY('+ this.scrollTop +'px)');
+    $td.css('transform', 'translateX('+ this.scrollLeft +'px)');
+});
+                        </code>
+                    </pre>                       
                   <div class="table-wrapper">
                           <table class="budget stickyjs">
                               <thead>
